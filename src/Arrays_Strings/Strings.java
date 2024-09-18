@@ -75,7 +75,7 @@ public class Strings {
       }
 
       public List<String> reverseSorting(){
-         List<String> reversed = Arrays.asList("ahmed", "mohamed", "momen");
+         List<String> reversed = Arrays.asList("ahmed", "mogihamed", "momen");
          Collections.sort(reversed, Comparator.naturalOrder());
 
          for (String x : reversed){
