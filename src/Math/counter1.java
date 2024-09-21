@@ -172,8 +172,78 @@ public class counter1 {
           return hours + minutes;
          }
 
+    public String shortestPalindrome(String s) {
+        int count = kmp(new StringBuilder(s).reverse().toString(), s);
+        return new StringBuilder(s.substring(count)).reverse().toString() + s;
 
-      }
+         }
+
+     /*
+     * this problem description is that we have a string and pattern and want to make
+     * the string is palindrome to the pattern so we will check for the common prefix of the pattern
+     * and then get the substring and reverse it then add it to the front of string
+     * */
+
+      private int kmp(String txt, String patt) {
+        String newString = patt + '#' + txt;
+        int[] pi = new int[newString.length()];
+        int i = 1, k = 0;
+        while (i < newString.length()) {
+            if (newString.charAt(i) == newString.charAt(k)) {
+                k++;
+                pi[i] = k;
+                i++;
+            } else {
+                if (k > 0) {
+                    k = pi[k - 1];
+                } else {
+                    pi[i] = 0;
+                    i++;
+                }
+            }
+        }
+        for (int x : pi){
+            System.out.print(x);
+        }
+        return pi[newString.length() - 1];
+    }
+
+    /*
+    *  Description - - > Given an integer n, return all the numbers in the range [1, n] sorted in lexicographical order.
+    *  You must write an algorithm that runs in O(n) time and uses O(1) extra space.
+    *
+    *  we will use an iterative approach we will make a list and loop from one to n then if number < n we will * 10
+    * if still < n we will add to list then if number % 10 = 9 we will increase the number then % 10 and add to list
+    * and repeat what we do before until the number equal n.
+    *  */
+
+    public List<Integer> lexicalOrder(int n) {
+     List<Integer>answer= new ArrayList<>();
+      int current = 1 ;
+     for(int i = 1 ; i <= n ; i++){
+       answer.add(current);
+       if(current * 10 <= n){
+        current *= 10;
+       }else {
+        while (current % 10 == 9 || current > n){
+            /* this check for us if the number  say 19 we will divide to 10, then
+            it will be we will increment by one then continue the process. */
+           current /= 10;
+
+        }
+        current ++;
+       }
+     }
+
+        return answer;
+    }
+
+
+
+
+}
+
+
 
 
 
