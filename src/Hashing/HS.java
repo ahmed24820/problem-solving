@@ -202,6 +202,36 @@ public class HS {
 
         return answer;
      }
+     
+     // 1331 leetcode problem
+    public int[] arrayRankTransform(int[] arr) {
+     HashMap<Integer,Integer> map = new HashMap<>();
+     int [] copyArr = new int[arr.length];
+     
+     for (int i = 0 ; i < arr.length ; i++){
+        copyArr[i] = arr[i];
+     }
+     
+     Arrays.sort(copyArr);
+     
+     int [] answer = new int[arr.length];
+     int counter = 0;
+     for (int i = 0 ; i < arr.length ; i++){
+         if (map.containsKey(copyArr[i])){
+            map.put(copyArr[i],map.get(copyArr[i]));
+         }else {
+         map.put(copyArr[i],++counter);
+     }
+     }
+     for (int i = 0 ; i < arr.length ; i++){
+       answer[i] = map.get(arr[i]);
+     }
+     return answer; // (n log n)
+    }
+     
+
+
+
 
 }
 
