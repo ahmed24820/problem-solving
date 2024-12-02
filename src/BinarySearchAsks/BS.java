@@ -30,8 +30,8 @@ public class BS {
              we will get the mid-row by divide the midpoint by m, and
             we will get the mid-column by modules the midpoint by m
             * */
-            int mid_row= midpoint / m;
-            int mid_col=midpoint % m;
+            int mid_row = midpoint / m;
+            int mid_col = midpoint % m;
             if(Matrix[mid_row][mid_col] == target){
                 return true;
             }else if (Matrix[mid_row][mid_col] < target){
@@ -56,7 +56,7 @@ public class BS {
              int res = Right;
                 while (left <= Right){
                    int hours = 0;
-                    int mid = (left +Right) /2 ;
+                    int mid = (left + Right) /2 ;
                    for( int k : piles){
                        hours += ( k / mid);
                        hours += (k % mid != 0) ? 1 : 0;

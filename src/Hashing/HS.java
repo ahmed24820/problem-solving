@@ -1,5 +1,6 @@
 package Hashing;
 import java.util.*;
+import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 public class HS {
@@ -53,66 +54,66 @@ public class HS {
         * that is for nine and 40 and 90 and 900 and 400
         * */
 
-             String answer = "";
+             StringBuilder answer = new StringBuilder();
         HashMap<Character,Integer> set=new HashMap<>();
         set.put('I',1);set.put('V',5);set.put('X',10);set.put('L',50);set.put('C',100);set.put('D',500);set.put('M',1000);
          while (num>0){
 
     //             log .info("the number now is >> " +"  " + num);
              if ( num > 0 && num < 5 && num !=4) {
-                 answer += 'I';
+                 answer.append('I');
                  num -= set.get('I');
              }
 
                 else if (num==9) {
-                    answer+="IX";
+                    answer.append("IX");
                     num-= set.get('X')-1;
                 }
                      else if (num >= 4 && num < 5) {
-                         answer+="IV";
+                         answer.append("IV");
                          num-= set.get('V')-1;
                      }
                 else if (num >= 40 && num < 50) {
-                    answer+="XL";
+                    answer.append("XL");
                     num-= set.get('L')-10;
                 }
                 else if (num >= 90 && num < 100 ) {
-                    answer+="XC";
+                    answer.append("XC");
                     num-= set.get('C')-10;
                 }
                 else if (num >= 400 && num < 500 ) {
-                    answer+="CD";
+                    answer.append("CD");
                     num-= set.get('D')-100;
                 }
                 else if (num >= 900 && num < 1000 ) {
-                    answer+="CM";
+                    answer.append("CM");
                     num-= set.get('M')-100;
                 }
                      else if (num >= 5 && num < 10) {
-                         answer+='V';
+                         answer.append('V');
                          num-=set.get('V');
                      }
                      else if (num >= 10 && num < 50) {
-                         answer+='X';
+                         answer.append('X');
                          num-=set.get('X');
                     }
                      else if (num >= 50 && num < 100) {
-                         answer += 'L';
+                         answer.append('L');
                          num -= set.get('L');
                      }
                      else if (num >= 100 && num < 500) {
-                         answer += 'C';
+                         answer.append('C');
                          num -= set.get('C');
                      }else if (num >= 500 && num < 1000) {
-                         answer += 'D';
+                         answer.append('D');
                          num -= set.get('D');
                      }
                      else if (num >= 1000) {
-                     answer += 'M';
+                     answer.append('M');
                      num -= set.get('M');
                    }
                  }
-        return  answer;
+        return answer.toString();
             }
     public int removeDuplicates(int[] nums) {
       int size =0;
@@ -204,7 +205,8 @@ public class HS {
      }
      
      // 1331 leetcode problem
-    public int[] arrayRankTransform(int[] arr) {
+    public int[] arrayRankTransform(int[] arr)
+    {
      HashMap<Integer,Integer> map = new HashMap<>();
      int [] copyArr = new int[arr.length];
      
@@ -228,11 +230,57 @@ public class HS {
      }
      return answer; // (n log n)
     }
+    
+     // leetcode 1590
+    public int minSubarray(int []nums , int p)
+    {
+     long sum = (long) Arrays.stream(nums).sum();
+     int reminder = (int) sum % p;
      
-
-
-
-
+     if (reminder == 0){
+         return 0;
+     }
+     int ans = nums.length;
+     HashMap<Integer , Integer> map = new HashMap<>();
+     int prefix = 0;
+     for (int i = 0 ; i < nums.length ; i++){
+       prefix += nums[i];
+       prefix %= p ;
+       
+       int target = (prefix - reminder + p) % p;
+       
+       log.info(" target now in " + i + " is " + target);
+       
+         log.info(" prefix now in  " + i + " is " + prefix);
+       
+       if (map.containsKey(target)){
+         ans = Math.min(ans , i - map.get(target));
+       }
+       map.put(prefix , i);
+     }
+     return ans == nums.length ? -1 : ans;
+    }
+    
+    public boolean canConstruct(String ransomNote, String magazine)
+    {
+     HashMap <Character , Integer> map = new HashMap<> ();
+     
+     for (char x : magazine.toCharArray ()){
+        map.put (x , map.getOrDefault ( x,0) + 1);
+     }
+     for (char x : ransomNote.toCharArray () ){
+         // the zero condition as we will reduce the value when we find it
+        if ( !map.containsKey (x) || map.get (x) == 0 ){
+           return false ;
+        }
+        map.put (x ,  map.getOrDefault ( x,0) - 1);
+     }
+     ransomNote.indexOf (magazine);
+     return true;
+    }
+    
+    
+ 
 }
 
 

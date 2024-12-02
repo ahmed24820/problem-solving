@@ -1,4 +1,4 @@
-package trie;
+package trie.trie;
 
 public class TrieNode {
 
@@ -13,7 +13,7 @@ public class TrieNode {
     }
 
     public boolean containInTrie(char c){
-        return trieNodes[c-'a'] != null;
+        return trieNodes[ c - 'a'] != null;
      }
 
      public TrieNode get(char c){

@@ -1,20 +1,19 @@
-package Math;
-import Arrays_Strings.Strings;
+package Math.Math;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
-public class counter1 {
+
+public class Counter {
     /*
      *  this problem is for that if we want to add an integer to other we don't always need to use string then convert we
      * can use long and * 10 and sum them
      * */
-    Logger log = Logger.getLogger(String.valueOf(counter1.class));
+    Logger log = Logger.getLogger(String.valueOf(Counter.class));
 
-    public counter1() {
+    public Counter() {
     }
 
     public int ReverseInteger(int num) {
@@ -42,13 +41,16 @@ public class counter1 {
         }
         return (int) FinalNumber;
     }
+    
+    
       public boolean isPalindrome(int x){
            StringBuilder s=new StringBuilder(String.valueOf(x));
            s.reverse();
           System.out.println(s);
           return s.toString().equals(x + "");
       }
-    public int mySqrt(int x) {
+  
+      public int mySqrt(int x) {
         int left = 1 , right = x , answer = 0;
         if(x == 0 || x == 1){
             return x;
@@ -225,22 +227,80 @@ public class counter1 {
        if(current * 10 <= n){
         current *= 10;
        }else {
-        while (current % 10 == 9 || current > n){
-            /* this check for us if the number  say 19 we will divide to 10, then
-            it will be we will increment by one then continue the process. */
+        while (current % 10 == 9 || current >= n){
+            /* this check for us if the number say 19 we will divide to 10, then
+            it will be incremented by one then continue the process. */
            current /= 10;
 
         }
         current ++;
        }
      }
-
+     for (int x : answer){
+         System.out.print(x + "\t");
+     }
         return answer;
     }
 
+    
+    public int findKthNumber(int n, int k){
+     int num = 1;
+     int i = 1;
+     while ( i <= k){
+       int steps = count( num ,num+1 , n);
+//         System.out.println( "the counter i is " + i + "\t" + "steps that will be added are" + steps + "number is " + num);
+       if( i + steps <= k){
+          i += steps;
+          num ++;
+       }else {
+           i++;
+           num *= 10;
+       }
 
+     }
+     return num;
+    }
+    
+      private int count (long num , long nei , int n){
+       int steps = 0;
+       while (num <= n){
+        steps += (int) (Math.min(n+1,nei) - num);
+        num *= 10;
+        nei *= 10;
+       }
+       return steps;
+      }
 
-
+    // leetcode 670
+    public int maximumSwap(int num) {
+     char [] digits = String.valueOf(num).toCharArray();
+      char max_digit = '0';
+      int max_i = -1 , swap_i = -1 ,swap_j = -1;
+      
+      for (int i = digits.length - 1; i >= 0 ; i--){
+         if (digits[i] > max_digit){
+             max_digit = digits[i];
+             max_i= i;
+         }
+         if (digits[i] < max_digit){
+            swap_i = i ;
+            swap_j = max_i;
+         }
+      }
+        if (swap_i == -1){
+         return num;
+        }
+      char temp = digits[swap_i];
+      digits[swap_i] = digits[swap_j];
+      digits[swap_j] = temp;
+      
+     
+      return Integer.parseInt(new String(digits));
+      
+      
+    }
+   
+    
 }
 
 

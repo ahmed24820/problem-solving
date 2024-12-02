@@ -1,5 +1,4 @@
-package Trees;
-
+package Trees.Trees;
 public class TreeNode {
 
       int val;

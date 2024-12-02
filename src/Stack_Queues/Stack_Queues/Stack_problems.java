@@ -1,6 +1,8 @@
 package Stack_Queues;
 
-import java.util.List;
+import Stack_Queues.Stack_Queues.Node;
+
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -51,39 +53,41 @@ public class Stack_problems {
                we make a node class and do
                 * */
 
-
-             int length;
-            public void push(int data){
+           int length;
+           public void push(int data){
             if(top == null){
                top=new Node(data,data,null);
             }else {
                Node NewNode = new Node(data,Math.min(data,top.minData),top);
-               top=NewNode;
+               top = NewNode;
                length++;
             }
            }
+        
            public int peak(){
               if(top==null){
                  return 0;
               }
                  return top.data;
            }
+        
            public int pop(){
                int result=0;
                if(top==null){
                    return 0;
                }else {
                result=top.data;
-               top=top.next;
+               top = top.next;
                length--;
                }
                return result;
            }
+           
            public int MinData(){
                return top.minData;
            }
 
-           /*
+             /*
            * this solution is to solve the Reverse Polish Notation.(the operators follow their operands)
            * so we use the stack and check if the variable is an operators so we get the two operands before
            * and supply the operator and finally get the result
@@ -124,7 +128,7 @@ public class Stack_problems {
                * this solution helps us to get the number of days we will stay to get more worm temperature
                * we need to return an array with values of the days we want to stay
                * */
-                public int [] dailyTemperatures(int[] temps) {
+            public int [] dailyTemperatures(int[] temps) {
                   final int n=temps.length;
                     int[] results = new int[n];
                     Stack<Integer> stack = new Stack<>();
@@ -137,7 +141,32 @@ public class Stack_problems {
                     }
                     return results;
                 }
-                 }
+
+            // leetcode 962
+            public int maxWidthRamp(int[] nums) {
+                int maxWidth = 0 , n = nums.length;
+                Stack<Integer> stack = new Stack<>();
+                
+                // step 1 : build a decreasing stack indices
+                for (int i = 0 ; i < n ; i++){
+                   if (stack.isEmpty() || nums[stack.peek()] > nums[i]){
+                       stack.push(i);
+                   }
+                }
+                
+                // step 2 : traverse from the end and find the max width
+                for (int i = n-1 ; i >= 0 ; i--){
+                   if (!stack.isEmpty() || nums[stack.peek()] <= nums[i]){
+                      maxWidth = Math.max(maxWidth,i - stack.pop());
+                   }
+                }
+                
+                return maxWidth;
+            }
+
+           
+
+}
 
 
 

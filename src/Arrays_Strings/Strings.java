@@ -1,9 +1,6 @@
 package Arrays_Strings;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Strings {
     public String longestPalindrome(String s) {
@@ -56,7 +53,7 @@ public class Strings {
 
       /*
       * this problem wants us to find the largest number from the numbers in the array
-      * [3,30,34,5,9] it will be 9534330. we will convert every number into a string and concat them together
+      * [3,30,34,5,9] it will be 9,534,330. we will convert every number into a string and concat them together
       * and use a custom sort to get the best solution with o(n log n) complexity
       * */
      public String largestNumber(int[] nums) {
@@ -64,7 +61,7 @@ public class Strings {
        for (int i =0 ; i < arr.length ; i++){
           arr[i] =String.valueOf(nums[i]);
        }
-         Arrays.sort(arr,(a,b) -> (b+a).compareTo(a+b));
+         Arrays.sort(arr,Comparator.reverseOrder());
        StringBuilder stringBuilder = new StringBuilder();
 
        for (String x : arr){
@@ -74,15 +71,30 @@ public class Strings {
       return stringBuilder.toString();
       }
 
-      public List<String> reverseSorting(){
-         List<String> reversed = Arrays.asList("ahmed", "mogihamed", "momen");
-         Collections.sort(reversed, Comparator.naturalOrder());
+      
 
-         for (String x : reversed){
-             System.out.println(x);
+        // leetcode 2938
+        /*
+        * if we have 010100 and want this to be 000011 so we will initilze a ptr in left and right in the first char
+        * then we will check if it is 0 we will take the diff it already 0 then move the counter forward then if
+        * it is one we will continue without any addition on left until we will found a zero we will take the diff
+        * between this zero and one that we iterate last and add it to answer
+        * */
+        public long minimumSteps(String s) {
+        int n = s.length(), left = 0  ; long counter = 0;
+         for (int right = 0 ; right < n ; right++){
+            if (s.charAt(right) == '0'){
+               counter += right - left;
+               left++;
+            }
          }
-         return reversed;
-       }
-
-
+         return counter;
+        }
+        
+        
+        
+        
+    
+    
+    
 }

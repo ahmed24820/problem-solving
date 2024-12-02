@@ -23,8 +23,8 @@ public class CustomStack {
         length--;
         return arr[top--];
     }
-    public void increment(int k , int val){
-      for (int i = 0 ; i < Math.min( k , top + 1) ; i++){
+	public void increment(int k , int val){
+		for (int i = 0 ; i < Math.min( k , top + 1) ; i++){
          arr[i] += val;
       }
     }
