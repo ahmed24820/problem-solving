@@ -1,4 +1,4 @@
-package Stack_Queues;
+package Stack_Queues.Stack_Queues;
 
 public class CustomStack {
     int arr[];
