@@ -70,9 +70,9 @@ public class BinaryTree {
      * this is a solution for a problem to convert every right and left node in the tree
      * we will use the recursion by swapping every node we reach by the opposite of it
      * */
-    public TreeNode InvertTree(TreeNode root) {
+    public void InvertTree(TreeNode root) {
         if (root == null) {
-            return null;
+            return;
         }
         TreeNode temp = root.left;
         root.left = root.right;
@@ -81,7 +81,6 @@ public class BinaryTree {
         InvertTree(root.left);
         InvertTree(root.right);
 
-        return root;
     }
 
     /*
@@ -116,13 +115,9 @@ public class BinaryTree {
         int left = findMax(root.left);
         int right = findMax(root.right);
 
-        if (left > res) {
-            res = left;
-        }
-        if (right > res) {
-            res = right;
-        }
-        return res;
+         res = Math.max(left,right);
+
+         return res;
     }
 
     /*
@@ -191,7 +186,7 @@ public class BinaryTree {
 
     /*
      * this solution to find the max number of nodes that we need to go through them to
-     * reach to the Farest node in the tree
+     * reach to the longest node in the tree
      * */
     public int maxDepth(TreeNode root) {
         if (root == null) {
