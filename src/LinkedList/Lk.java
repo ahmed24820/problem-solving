@@ -10,7 +10,7 @@ public class Lk {
 
   public void insert(int data){
      Node NewNode = new Node(data);
-     NewNode=head.next;
+     NewNode = head.next;
      head=NewNode;
    }
    /* this solution to solve the problem of reversing the linked list and return the first value in it,
@@ -62,8 +62,8 @@ public class Lk {
     public void reorderList(Node head) {
      Node slow = head , fast = slow.next;
      while (fast !=null || fast.next != null){
-         slow=slow.next;
-         fast=fast.next.next;
+         slow = slow.next;
+         fast = fast.next.next;
      }
      Node first = head;
      Node middle = slow.next;

@@ -14,37 +14,28 @@ public class Stack_problems {
 
     public boolean isValid(String s) {
         Stack<Character> stack=new Stack<>();
-        char[] arr=s.toCharArray();
-        for (char i:arr) {
-          if(i == '{' || i == '(' || i == '['){
-              stack.push(i);
-          }else if(i == '}'){
-            if(!stack.isEmpty()){
-              char x=stack.peek();
-              if(x == '{'){
-                 stack.pop();
-              }else {
-                  return  false;}}
-          }else if(i == ']'){
-              if(!stack.isEmpty()){
-                  char x=stack.peek();
-                  if(x == '['){
-                      stack.pop();
-                  }else {
-                      return  false;}}
-          }else if(i == ')'){
-              if(!stack.isEmpty()){
-                  char x=stack.peek();
-                  if(x == '('){
-                      stack.pop();
-                  }else {
-                      return  false;
-                  }}}}
-         if(stack.isEmpty()){
-        return true;
-         }
-         else
-             return false;}
+        for (char ch : s.toCharArray()){
+            if (ch == '{' || ch == '(' || ch =='[') {
+                stack.push(ch);
+            }else if (ch == '}'){
+               if (!stack.isEmpty() && stack.pop() != '{'){
+                   return false;
+               }
+            }
+               else if (ch == ')'){
+                   if (!stack.isEmpty() && stack.pop() != '('){
+                       return false;
+                   }
+               }
+                   else if (ch == ']'){
+                       if (!stack.isEmpty() && stack.pop() != '['){
+                           return false;
+                       }
+                   }
+        }
+        return stack.isEmpty();
+
+    }
 
 
 

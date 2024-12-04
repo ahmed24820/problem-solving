@@ -1,6 +1,5 @@
 package Hashing;
 import java.util.*;
-import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 public class HS {
@@ -30,7 +29,8 @@ public class HS {
         return maxLength;
       }
 
-    public int lengthOfLastWord(String s) {
+    public int lengthOfLastWord(String s)
+    {
         int counter = 0, n = s.length();
         while(s.charAt(n-1) == ' '){
             n--;
@@ -48,7 +48,10 @@ public class HS {
         }
         return  counter;
     }
-    public String intToRoman(int num) {
+
+    public String intToRoman(int num)
+    {
+
         /*
         *  we have a constraint that allow us if we have four we do not use IIII we can use IV that is better
         * that is for nine and 40 and 90 and 900 and 400
@@ -115,7 +118,9 @@ public class HS {
                  }
         return answer.toString();
             }
-    public int removeDuplicates(int[] nums) {
+
+    public int removeDuplicates(int[] nums)
+    {
       int size =0;
       HashMap<Integer,Integer>hashMap=new HashMap<>();
       for(int i=0 ; i < nums.length ; i++){
@@ -142,7 +147,8 @@ public class HS {
       return size;
      }
 
-    public int removeElement(int[] nums, int val) {
+    public int removeElement(int[] nums, int val)
+    {
         int size =0;
         HashMap<Integer,Integer>hashMap=new HashMap<>();
         for (int num : nums) {
@@ -163,7 +169,8 @@ public class HS {
     * this solution to solve a problem to find the duplicated number without any modifying in the array
     * we will use the hash map, and we will put the element and the number that this number occurs in the array
     * */
-    public int findDuplicate(int[] nums) {
+    public int findDuplicate(int[] nums)
+    {
       int answer = 0;
         Map <Integer , Integer> map = new HashMap<>();
         for (int i : nums){
@@ -181,7 +188,8 @@ public class HS {
     }
 
 
-     public String[] uncommonFromSentences(String s1, String s2) {
+     public String[] uncommonFromSentences(String s1, String s2)
+     {
         String finalString = s1 +" " + s2;
         HashMap<String , Integer> map = new HashMap<>();
         String []words = finalString.split(" ");
@@ -278,9 +286,26 @@ public class HS {
      ransomNote.indexOf (magazine);
      return true;
     }
-    
-    
- 
+
+    // leet code 205
+    public boolean isIsomorphic(String s, String t) {
+       if (t.length() != s.length()) return false ; // check for the equality of the length
+     HashMap<Character , Character> map = new HashMap<>();
+      // check for every character and his corresponding character in the another string
+        for (int i = 0 ; i < s.length() ; i++){
+           if (map.containsKey(s.charAt(i))){
+              if (map.get(s.charAt(i)) != t.charAt(i))  return false ;
+
+           }else {
+               // check the characters of t  if t is already exists we will return false --> (this means that char has been repeated in one and the other is not )
+               if (map.containsValue(t.charAt(i))){
+                   return false;
+               }
+               map.put(s.charAt(i) , t.charAt(i));
+           }
+        }
+        return true;
+    }
 }
 
 

@@ -1,7 +1,7 @@
 package Stack_Queues.Stack_Queues;
 
 public class CustomStack {
-    int arr[];
+    int[] arr;
     int top;
     int length;
     public CustomStack(int maxSize){
