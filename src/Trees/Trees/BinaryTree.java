@@ -4,9 +4,10 @@ import java.util.*;
 
 public class BinaryTree {
 
-    private TreeNode root = null;
+    private TreeNode root = null ;
 
-    public TreeNode CreateBinaryTree() {
+    public TreeNode CreateBinaryTree()
+    {
         TreeNode first = new TreeNode(10); // we are going to make a binary tree manually and set leaves
         TreeNode second = new TreeNode(20);
         TreeNode third = new TreeNode(30);
@@ -31,7 +32,8 @@ public class BinaryTree {
      * that's show us the trace of the tree with the recursive way we print the (root-left-right)
      */
 
-    public void PreOrder(TreeNode root) {
+    public void PreOrder(TreeNode root)
+    {
         if (root == null) {
             return ;
         }
@@ -43,7 +45,8 @@ public class BinaryTree {
     /*
      * that's show us the trace of the tree with the recursive way we print the (left-root-right)
      */
-    public void InOrder(TreeNode root) {
+    public void InOrder(TreeNode root)
+    {
         if (root == null) {
             return;
         }
@@ -56,7 +59,8 @@ public class BinaryTree {
     /*
      * that's show us the trace of the tree with the recursive way we print the (right-left-root)
      */
-    public void PostOrder(TreeNode root) {
+    public void PostOrder(TreeNode root)
+    {
         if (root == null) {
             return;
         }
@@ -70,7 +74,8 @@ public class BinaryTree {
      * this is a solution for a problem to convert every right and left node in the tree
      * we will use the recursion by swapping every node we reach by the opposite of it
      * */
-    public void InvertTree(TreeNode root) {
+    public void InvertTree(TreeNode root)
+    {
         if (root == null) {
             return;
         }
@@ -86,7 +91,8 @@ public class BinaryTree {
     /*
      * this is the level order traversal for a tree using the queue
      * */
-    public void LevelOrder(TreeNode root) {
+    public void LevelOrder(TreeNode root)
+    {
         if (root == null) {
             return;
         }
@@ -103,11 +109,13 @@ public class BinaryTree {
             }
         }
     }
+
     /*
      * How to find the max number in the tree, we will use the recursive way
      * */
 
-    public int findMax(TreeNode root) {
+    public int findMax(TreeNode root)
+    {
         if (root == null) {
             return 0;
         }
@@ -126,7 +134,8 @@ public class BinaryTree {
      * we will use the hash set to keep the childes in it and the number that does not appear is the parent
      * then we make a hashmap with the parent is a key and array that has left and right in the value
      *  */
-    public TreeNode createBinaryTree(int[][] descriptions) {
+    public TreeNode createBinaryTree(int[][] descriptions)
+    {
         HashSet<Integer> children = new HashSet<>();
         HashMap<Integer, int[]> map = new HashMap<>();
 
@@ -145,8 +154,10 @@ public class BinaryTree {
             }
         }
 
-        // now we want to know the root we will loop in the set to check for the parent
-        // if it is not present that is the root
+        /*
+         now we want to know the root we will loop in the set to check for the parent
+         if it is not present that is the root
+         */
         int head = 0;
         for (int i : map.keySet()) {
             if (!children.contains(i)) {
@@ -158,7 +169,8 @@ public class BinaryTree {
     }
 
     // now we want to make the tree and set every left and right node for each parent
-    public TreeNode ConstructTree(int CurrentValue, HashMap<Integer, int[]> Directions) {
+    public TreeNode ConstructTree(int CurrentValue, HashMap<Integer, int[]> Directions)
+    {
         TreeNode Current = new TreeNode(CurrentValue);
         if (Directions.containsKey(CurrentValue)) {
             int[] children = Directions.get(CurrentValue);
@@ -172,7 +184,8 @@ public class BinaryTree {
         return Current;
     }
 
-    public TreeNode search(TreeNode root, int val) {
+    public TreeNode search(TreeNode root, int val)
+    {
         if (root == null || root.val == val) {
             return root;
         }
@@ -188,7 +201,8 @@ public class BinaryTree {
      * this solution to find the max number of nodes that we need to go through them to
      * reach to the longest node in the tree
      * */
-    public int maxDepth(TreeNode root) {
+    public int maxDepth(TreeNode root)
+    {
         if (root == null) {
             return 0;
         }
@@ -204,14 +218,16 @@ public class BinaryTree {
      * here we recursively get the big number of edges from the left, and right then we sum them
      * then we get the tallest path from right and left (not from the root)
      * */
-    public int MaxDiameter(TreeNode root) {
+    public int MaxDiameter(TreeNode root)
+    {
         Length(root);
         return maxDia;
     }
 
     int maxDia = 0;
 
-    public int Length(TreeNode root) {
+    public int Length(TreeNode root)
+    {
         if (root == null) {
             return 0;
         }
@@ -226,7 +242,8 @@ public class BinaryTree {
     *  this code to check if the tree is a balanced tree which every right and left node has(0 or 1 or -1)
     * difference between themselves
     * */
-    public boolean isBalanced(TreeNode root) {
+    public boolean isBalanced(TreeNode root)
+    {
         if(root == null){
             return true;
         }
@@ -239,12 +256,14 @@ public class BinaryTree {
 
         return isBalanced(root.left) && isBalanced(root.right);
     }
+
     /*
     * this solution to check if the two trees are equals or not by recursive every node
     * and check if it equals the corresponding in another tree
      * */
 
-    public boolean isSameTree(TreeNode p, TreeNode q) {
+    public boolean isSameTree(TreeNode p, TreeNode q)
+    {
      if(p == null || q == null ){
          return p == null && q == null;
      }
@@ -253,24 +272,25 @@ public class BinaryTree {
      }
          return isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
     }
-    public boolean isSubtree(TreeNode root, TreeNode subRoot){
+    public boolean isSubtree(TreeNode root, TreeNode subRoot)
+      {
         if(subRoot == null && root != null || root == null && subRoot == null){
             return true;
         }
-        if (subRoot != null && root == null){
+        if (root == null){
             return false ;
         }
         if( isSameTree(root ,subRoot))return true;
         return isSubtree(root.left , subRoot) || isSubtree(root.right , subRoot);
     }
 
-       /*
+         /*
        * this is a solution to traverse the tree with level order with BFS
        * we use the queue to set the fifo style, and we get every level in a list then
        * we collect all lists in one result list to get the answer
        * */
-
-          public List<List<Integer>> levelOrder(TreeNode root) {
+          public List<List<Integer>> levelOrder(TreeNode root)
+          {
             List<List<Integer>> FinalList =new ArrayList<>();
             Queue<TreeNode> queue = new LinkedList<>();
             queue.offer(root);
@@ -292,22 +312,24 @@ public class BinaryTree {
         return FinalList;
        }
 
-       public boolean isValidBST(TreeNode root) {
+       public boolean isValidBST(TreeNode root)
+       {
 
-      return isvalid(root ,Integer.MIN_VALUE,Integer.MIN_VALUE );
+      return valid(root ,Integer.MIN_VALUE,Integer.MIN_VALUE );
 
         }
 
-        public boolean isvalid(TreeNode root , long min , long max){
+        public boolean valid(TreeNode root , long min , long max)
+        {
              if(root == null){
                  return true;
              }
              if(root.val <= min || root.val >= max){
                  return false;
              }
-             boolean isleft = isvalid(root.left , min , root.val);
+             boolean isleft = valid(root.left , min , root.val);
              if(isleft){
-                isvalid(root.right , root.val, max);
+                valid(root.right , root.val, max);
                return true;
              }
              return false;
@@ -317,7 +339,8 @@ public class BinaryTree {
         * this is problem name is the lowest common ancestor we need to find the nearest node to the two
         * nodes with constraints that p and q are descendants for this node
         * */
-        public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q)
+        {
             if (root == null) {
                 return null;
             }
@@ -330,9 +353,12 @@ public class BinaryTree {
          return root;
         }
 
-        // here we need to show the right side if it is in ascending order
-        // we will use the bfs with queue
-        public List<Integer> rightSideView(TreeNode root){
+        /* here we need to show the right side if it is in ascending order
+         we will use the bfs with queue
+        */
+        public List<Integer> rightSideView(TreeNode root)
+        {
+
             List<Integer> result =new ArrayList<>();
             Queue<TreeNode>queue = new LinkedList<>();
              if (root == null){
@@ -351,6 +377,7 @@ public class BinaryTree {
 
           return result;
         }
+
         /*
         * this problem solution to find nodes that has no nodes that has value greater than it
         * in the path from the root to it,
@@ -358,11 +385,14 @@ public class BinaryTree {
         * we will increase the result by one
         * */
 
-        public int goodNodes(TreeNode root , int MaxVal){
+        public int goodNodes(TreeNode root , int MaxVal)
+        {
             return dfs(root,root.val);
+
         }
         int result = 0;
-        public int dfs(TreeNode root , int max){
+        public int dfs(TreeNode root , int max)
+        {
             if (root == null){
                 return 0 ;
             }
@@ -378,56 +408,78 @@ public class BinaryTree {
           return result;
         }
 
-           /*
-           * this problem to get the kth of the element in the BST we will use the inorder traversal to find
-           * the number
-           * */
-           public int kthSmallest(TreeNode root, int k) {
-               Stack<TreeNode>stack = new Stack<>();
-               int n = 0 , answer = 0;
-               TreeNode current =root;
-               while (current != null || !stack.isEmpty()){
-                   while (current !=null){
-                      stack.add(current);
-                      current = current.left;
-                   }
-                   current = stack.pop();
-                   n++;
-                   if(n == k){
-                     answer = current.val;
-                   }
-                   current = current.right;
+       /*
+       * this problem to get the kth of the element in the BST we will use the inorder traversal to find
+       * the number
+       * */
+       public int kthSmallest(TreeNode root, int k) {
+           Stack <TreeNode> stack = new Stack<>();
+           int n = 0 , answer = 0;
+           TreeNode current =root;
+           while (current != null || !stack.isEmpty()){
+               while (current !=null){
+                  stack.add(current);
+                  current = current.left;
                }
-                return answer;
+               current = stack.pop();
+               n++;
+               if(n == k){
+                 answer = current.val;
+               }
+               current = current.right;
+           }
+            return answer;
+        }
+
+        /*
+        * know we have an inorder traversal and preorder traversal for a tree
+        * we need to construct the main tree from these two trees
+        * we will get the root from the preorder as the first element is always the root
+        * then we search for it in an inorder array and the elements that are before are in the left
+        * the elements after are on the right side
+        * */
+        public TreeNode buildTree(int[] preorder, int[] inorder)
+        {
+            return GetTree(0,0,inorder.length - 1,preorder,inorder);
+         }
+
+         public TreeNode GetTree(int preStart , int inStart , int inEnd , int[]preorder , int[] inorder)
+         {
+            if (preStart > preorder.length-1 || inStart > inEnd){
+              return null;
             }
+            TreeNode root = new TreeNode(preorder[preStart]); // to Get the root from the preorder array as the first element
 
-            /*
-            * know we have an inorder traversal and preorder traversal for a tree
-            * we need to construct the main tree from these two trees
-            * we will get the root from the preorder as the first element is always the root
-            * then we search for it in an inorder array and the elements that are before are in the left
-            * the elements after are on the right side
-            * */
-            public TreeNode buildTree(int[] preorder, int[] inorder) {
-                return GetTree(0,0,inorder.length - 1,preorder,inorder);
-             }
-             public TreeNode GetTree(int preStart , int inStart , int inEnd , int[]preorder , int[] inorder){
-                if (preStart > preorder.length-1 || inStart > inEnd){
-                  return null;
+            // we will check for it in the inorder array and get the index of it
+              int index = 0;
+             for (int i = inStart; i <= inEnd ; i++){
+                if (root.val == inorder[i]){
+                   index = i;
                 }
-                TreeNode root = new TreeNode(preorder[preStart]); // to Get the root from the preorder array as the first element
+            }
+              root.left =GetTree(preStart + 1 , inStart , index - 1, preorder, inorder);
+              root.right =GetTree(preStart + index - inStart + 1 , index + 1 , inEnd , preorder, inorder);
+             return root;
+         }
 
-                // we will check for it in the inorder array and get the index of it
-                  int index = 0;
-                 for (int i = inStart; i <= inEnd ; i++){
-                    if (root.val == inorder[i]){
-                       index = i;
-                    }
-                }
-                  root.left =GetTree(preStart + 1 , inStart , index - 1, preorder, inorder);
-                  root.right =GetTree(preStart + index - inStart + 1 , index + 1 , inEnd , preorder, inorder);
-                 return root;
+
+         // leetcode 101
+         public boolean isSymmetric(TreeNode root)
+         {return  checkEquality(root.left , root.right);
+         }
+         public boolean checkEquality(TreeNode left , TreeNode right)
+         {
+             if (left == null && right == null){
+                 return true;
+             } else if (left == null || right ==null ) {
+                 return false;
              }
+
+             return  (left.val == right.val
+                     && checkEquality(left.left , right.right)
+                     && checkEquality(left.right , right.left));
+
+         }
 
 
 }
